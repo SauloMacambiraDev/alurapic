@@ -1,7 +1,16 @@
 <template>
   <!-- <img v-for="dogObj in urlDogImgs" :key="dogObj.id" v-bind:src="dogObj.url" v-bind:alt="dogObj.name" /> -->
+  <!-- 
+      Ways of calling our 'my-transform' directive
+      v-my-transform="15"                                   -> binding.value = 15
+      v-my-transform="{ increment: 15, animate: true}"      -> binding.value = { increment:15, animate: true }
+      v-my-transform.animate="15"                           -> binding.value = 15; binding.modifiers.animate=true
+      v-my-transform.animate.reverse="15"                   -> binding.value = 15; binding.modifiers.animate=true; binding.modifiers.reverse=true; 
+      v-shake-dogcard:translate.fastAnimation="20"    -> binding.value = 15; binding.modifiers.fastAnimatio = true; binding.arg = "translate"
+   -->
+  
   <div
-    v-my-transform
+    v-shake-dogcard:translate.fastAnimation="2"
     class="dog-card"
     :class="isFadingOut ? 'dog-card-fadding-out' : ''"
   >
@@ -10,7 +19,7 @@
         <img src="@/assets/icons/edit-icon.png" alt="Editar Dogo" />
       </button>
       <button class="dogo-btn" @click="deleteDogo()">
-        <img src="@/assets/icons/delete-icon.png" alt="Deleter Dogo" />
+        <img src="@/assets/icons/delete-icon.png" alt="Delete Dogo" />
       </button>
     </div>
 

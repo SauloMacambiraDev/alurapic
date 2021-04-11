@@ -4,7 +4,10 @@ import App from "./App.vue";
 import VueRouter from "vue-router";
 
 import { routes } from "./routes";
+
+// Loading globally our custom directives
 import "./directives/transform";
+import "./directives/shakeDogCard";
 
 Vue.config.productionTip = false;
 

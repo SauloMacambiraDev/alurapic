@@ -1,5 +1,5 @@
 import Vue from "vue";
-import { directive } from "vue/types/umd";
+// import { directive } from "vue/types/umd";
 
 /*
     Once a declare a new Directive, everytime i call into a component
@@ -12,22 +12,23 @@ import { directive } from "vue/types/umd";
 Vue.directive("my-transform", {
   // bind() is called everytime the directive is attached to a DOM element
   bind(el, binding, vnode) {
-    // el --> reference to the dom element where the directive was attached/associated
-    // binding -->
+    /*
+      el --> reference to the dom element where the directive was attached/associated
+      binding --> receives data provided when attached as html attribute. For Example v-my-transform="15"
+        then, to catch the value, all we would have to do is this: binding.value;
+      vnode -->
+    */
+    console.log('binding:')
+    console.log(binding)
     let current = 0;
 
-    el.addEventListener("dbclick", function() {
-      current += 90;
+    el.addEventListener("click", function() {
+      let increment = binding.value || 90;
+      let reverse =  binding.modifiers.reverse || false 
+
+      current += increment
+      el.style.transform = `rotate(${reverse ? '-' : null}${current}deg)`;
+      if(binding.modifiers.animate) el.style.transition = 'transform 0.25s'
     });
-
-    console.log('Associated directive: "my-transform"');
-    console.log("el parameter:");
-    console.log(el);
-
-    // console.log("binding parameter:");
-    // console.log(this.binding);
-
-    // console.log("vnode parameter:");
-    // console.log(this.vnode);
   },
 });
