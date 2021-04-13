@@ -52,8 +52,8 @@ function animateEl(element, animationType = 'rotate', animationValue = 15, isAni
 
 Vue.directive('shake-dogcard', {
     bind(el, binding, vnode) {
-        console.log('binding:')
-        console.log(binding)
+        // console.log('binding:')
+        // console.log(binding)
 
         const degrees = binding.value || 15
         const typeOfAnimation = binding.arg || 'rotate'

@@ -7,6 +7,9 @@
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
 
+// Domains
+import Dogo from "@/domain/dogo/Dogo";
+
 // Services
 import api from "./../services/dogApi";
 
@@ -42,17 +45,26 @@ export default {
       const responses = await Promise.all(requests);
       const urlDogImgs = [];
 
-      responses.forEach(async ({ data }) => {
+      responses.forEach(({ data }) => {
         const dogData = data && data.length > 0 ? data[0] : null;
         if (dogData) {
-          urlDogImgs.push({
-            id: dogData.id,
-            url: dogData.url,
-            name:
+          urlDogImgs.push(
+            new Dogo(
+              dogData.id,
+              dogData.url,
               dogData.breeds && dogData.breeds.length > 0
                 ? dogData.breeds[0].name
-                : "Not identified Dog",
-          });
+                : "Not Identified Dog"
+            )
+          );
+          // urlDogImgs.push({
+          //   id: dogData.id,
+          //   url: dogData.url,
+          //   name:
+          //     dogData.breeds && dogData.breeds.length > 0
+          //       ? dogData.breeds[0].name
+          //       : "Not identified Dog",
+          // });
         }
       });
 

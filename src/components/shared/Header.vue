@@ -7,8 +7,8 @@
 
     <nav>
       <ul>
-        <li v-for="navItem in navItems" :key="navItem">
-          <router-link :to="navItem.url">{{ navItem.name }}</router-link>
+        <li v-for="navItem in navItems" :key="navItem.name">
+          <router-link :to="{ name: navItem.name }">{{ navItem.title }}</router-link>
         </li>
       </ul>
     </nav>
@@ -16,14 +16,22 @@
 </template>
 
 <script>
+import { routes } from "@/routes";
+
 export default {
   name: "Header",
+  computed: {
+    navItems() {
+      return routes.filter((route) => route.menuHeader);
+    },
+  },
   data: () => ({
-    navItems: [
-      { name: "Home", url: "/" },
-      { name: "Cadastrar Dogo", url: "/cadastrar-dog" },
-      { name: "Contact", url: "#" },
-    ],
+    // navItems: [
+    //   { name: "Home", url: "/" },
+    //   // { name: "Cadastrar Dogo", url: "/cadastrar-dog" },
+    //   { name: "Cadastrar Dogo", url: "/cadastrar-dog" },
+    //   { name: "Contact", url: "/contact" },
+    // ],
   }),
   //   props: ['title'],
   props: {

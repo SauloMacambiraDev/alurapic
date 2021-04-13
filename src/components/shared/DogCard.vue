@@ -7,17 +7,22 @@
       v-my-transform.animate="15"                           -> binding.value = 15; binding.modifiers.animate=true
       v-my-transform.animate.reverse="15"                   -> binding.value = 15; binding.modifiers.animate=true; binding.modifiers.reverse=true; 
       v-shake-dogcard:translate.fastAnimation="20"    -> binding.value = 15; binding.modifiers.fastAnimatio = true; binding.arg = "translate"
+      v-input-validation="{ maxLength: 15, minLength: 3, required: true, error: errorDataMessage }"
    -->
-  
+
   <div
     v-shake-dogcard:translate.fastAnimation="2"
     class="dog-card"
     :class="isFadingOut ? 'dog-card-fadding-out' : ''"
   >
     <div class="floated-btns-content">
-      <button class="dogo-btn">
+      <!-- <button @click="goEditDogo()" class="dogo-btn"> -->
+      <router-link
+        :to="{ name: 'updateDogo', params: { id: dogData.id } }"
+        class="dogo-btn"
+      >
         <img src="@/assets/icons/edit-icon.png" alt="Editar Dogo" />
-      </button>
+      </router-link>
       <button class="dogo-btn" @click="deleteDogo()">
         <img src="@/assets/icons/delete-icon.png" alt="Delete Dogo" />
       </button>
@@ -48,6 +53,10 @@ export default {
       this.isFadingOut = true;
       this.$emit("dispatchRemoveDogo", new Date());
     },
+    // goEditDogo(){
+    //   this.$route.push(`/cadastrar-dog/${this.dogData.id}`)
+    //   this.$route.push({ name: 'updateDogo', params: { id: this.dogData.id } })
+    // }
   },
   props: {
     dog: Object,
@@ -56,7 +65,7 @@ export default {
 </script>
 
 <style>
-/* <style scoped> --> scoped keyword indicate that all css implied here would only work for the current component, which
+/* <style scoped> --> scoped attribute keyword indicate that all css implied here would only work for the current component, which
 is: DogCard */
 .dog-list .dog-card {
   position: relative;
@@ -128,7 +137,7 @@ is: DogCard */
   align-items: center;
 }
 
-.dog-card button.dogo-btn {
+.dog-card .dogo-btn {
   border: none;
   background-color: rgba(255, 255, 255, 0.95);
   padding: 1rem;
@@ -137,12 +146,12 @@ is: DogCard */
   cursor: pointer;
 }
 
-.dog-card button.dogo-btn img {
+.dog-card .dogo-btn img {
   width: 24px;
   height: 24px;
   object-fit: cover;
 }
-.dog-card button.dogo-btn + button.dogo-btn {
+.dog-card .dogo-btn + .dogo-btn {
   margin-left: 1rem;
 }
 </style>

@@ -18,8 +18,8 @@ Vue.directive("my-transform", {
         then, to catch the value, all we would have to do is this: binding.value;
       vnode -->
     */
-    console.log('binding:')
-    console.log(binding)
+    // console.log('binding:')
+    // console.log(binding)
     let current = 0;
 
     el.addEventListener("click", function() {
